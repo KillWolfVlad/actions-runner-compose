@@ -14,15 +14,16 @@ Like [Kubernetes controller for GitHub Actions self-hosted runners](https://gith
 ### On Your Server
 
 1. `mkdir actions-runner-compose && cd actions-runner-compose`
-2. `cp .env.example .env && nano .env` (see [.env.example](./.env.example) for more details)
-3. `nano compose.yaml` with this content (you can find latest version in [GitHub Packages](https://github.com/users/KillWolfVlad/packages/container/package/actions-runner-compose))
+2. `nano .env` with content from [.env.example](./.env.example)
+3. `nano compose.yaml` with content below (you can find latest version in [GitHub Packages](https://github.com/users/KillWolfVlad/packages/container/package/actions-runner-compose))
 
 ```yaml
 name: actions-runner-compose
 
 services:
   actions-runner-compose:
-    image: ghcr.io/killwolfvlad/actions-runner-compose:${IMAGE_VERSION}
+    container_name: arc
+    image: ghcr.io/killwolfvlad/actions-runner-compose:master-0eeef7
     restart: unless-stopped
     environment:
       PORT: "8080"
@@ -43,7 +44,7 @@ services:
 
 ```caddy
 yourdomain.com {
-  reverse_proxy http://localhost:8080
+    reverse_proxy http://localhost:8080
 }
 ```
 
