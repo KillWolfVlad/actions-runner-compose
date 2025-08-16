@@ -15,7 +15,7 @@ Like [Kubernetes controller for GitHub Actions self-hosted runners](https://gith
 
 1. `mkdir actions-runner-compose && cd actions-runner-compose`
 2. `nano .env` with content from [.env.example](./.env.example)
-3. `nano compose.yaml` with content below (you can find latest version in [GitHub Packages](https://github.com/users/KillWolfVlad/packages/container/package/actions-runner-compose))
+3. `nano compose.yaml` with content below (you can find versions in [GitHub Packages](https://github.com/users/KillWolfVlad/packages/container/package/actions-runner-compose))
 
 ```yaml
 name: actions-runner-compose
@@ -23,7 +23,7 @@ name: actions-runner-compose
 services:
   actions-runner-compose:
     container_name: arc
-    image: ghcr.io/killwolfvlad/actions-runner-compose:master-0eeef7
+    image: ghcr.io/killwolfvlad/actions-runner-compose:latest
     restart: unless-stopped
     environment:
       PORT: "8080"

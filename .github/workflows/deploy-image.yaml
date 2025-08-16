@@ -3,8 +3,7 @@ name: deploy-image
 on:
   workflow_dispatch:
   push:
-    branches:
-      - master
+    branches: ["master"]
 
 permissions:
   packages: write
@@ -22,10 +21,20 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
 
-      - run: echo "IMAGE_NAME=ghcr.io/killwolfvlad/actions-runner-compose:$(echo ${{ github.ref_name }} | tr / -)-$(echo ${{ github.sha }} | cut -c 1-6)" >> "$GITHUB_ENV"
+      - uses: docker/setup-qemu-action@v3
+
+      - uses: docker/setup-buildx-action@v3
+
+      - run: echo "IMAGE_NAME=ghcr.io/$(echo ${{ github.repository }} | tr '[:upper:]' '[:lower:]')" >> "$GITHUB_ENV"
+
+      - run: echo "TAGS=$IMAGE_NAME:$(echo ${{ github.ref_name }} | tr / -)-${{ github.run_number }}-$(echo ${{ github.sha }} | cut -c 1-6)" >> "$GITHUB_ENV"
+
+      - if: github.ref == 'refs/heads/master'
+        run: echo "TAGS=$IMAGE_NAME:latest,$TAGS" >> "$GITHUB_ENV"
 
       - uses: docker/build-push-action@v6
         with:
           context: .
           push: true
-          tags: ${{ env.IMAGE_NAME }}
+          platforms: linux/amd64,linux/arm64/v8
+          tags: ${{ env.TAGS }}
