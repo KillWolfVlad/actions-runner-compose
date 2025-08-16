@@ -1,6 +1,6 @@
 module github.com/KillWolfVlad/actions-runner-compose
 
-go 1.24.5
+go 1.25.0
 
 require (
 	github.com/go-playground/webhooks/v6 v6.4.0
