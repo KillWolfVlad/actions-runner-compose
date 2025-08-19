@@ -48,9 +48,9 @@ yourdomain.com {
 }
 ```
 
-### Setup WebHook in GitHub Repository
+### Setup Webhook in GitHub Repository
 
-- Payload URL: `yourdomain.com/${WEBHOOK_PATH}`
+- Payload URL: `https://yourdomain.com/${WEBHOOK_PATH}`
 - Content type: `application/json`
 - Secret: `${WEBHOOK_SECRET}`
 - SSL verification: `Enable SSL verification`
