@@ -5,7 +5,7 @@ go 1.25.0
 require (
 	github.com/go-playground/webhooks/v6 v6.4.0
 	github.com/joho/godotenv v1.5.1
-	github.com/moby/moby/api v1.52.0-alpha.1
+	github.com/moby/moby/api v1.53.0
 	github.com/moby/moby/client v0.1.0-alpha.0
 )
 
